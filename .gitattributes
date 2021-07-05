@@ -1,0 +1,16 @@
+# prototype-kicad-project-ci-cd
+#
+# Copyright 2021, Andrew Countryman <apcountryman@gmail.com> and the
+# prototype-kicad-project-ci-cd contributors
+#
+# You may redistribute and modify this documentation and make products using it under the
+# terms of the CERN-OHL-P v2 (https:/cern.ch/cern-ohl). This documentation is distributed
+# WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY
+# QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
+# applicable conditions.
+
+# File: .gitattributes
+# Description: Git attributes for the prototype-kicad-project-ci-cd repository.
+
+# scrub KiCad project files
+*.pro filter=kicad_project

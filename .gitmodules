@@ -1,0 +1,23 @@
+# prototype-kicad-project-ci-cd
+#
+# Copyright 2021, Andrew Countryman <apcountryman@gmail.com> and the
+# prototype-kicad-project-ci-cd contributors
+#
+# You may redistribute and modify this documentation and make products using it under the
+# terms of the CERN-OHL-P v2 (https:/cern.ch/cern-ohl). This documentation is distributed
+# WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY
+# QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
+# applicable conditions.
+
+# File: .gitmodules
+# Description: Git submodules of the prototype-kicad-project-ci-cd repository.
+
+# libraries
+[submodule "prototype-kicad-library-ci"]
+	path = prototype-kicad-library-ci
+	url = ../prototype-kicad-library-ci
+
+# utilities
+[submodule "utilities/kicad-library-utils"]
+	path = utilities/kicad-library-utils
+	url = ../kicad-library-utils

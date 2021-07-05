@@ -1,0 +1,65 @@
+# prototype-kicad-project-ci-cd
+#
+# Copyright 2021, Andrew Countryman <apcountryman@gmail.com> and the
+# prototype-kicad-project-ci-cd contributors
+#
+# You may redistribute and modify this documentation and make products using it under the
+# terms of the CERN-OHL-P v2 (https:/cern.ch/cern-ohl). This documentation is distributed
+# WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY
+# QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
+# applicable conditions.
+
+# File: .github/workflows/ci.yml
+# Description: GitHub Actions CI workflow for the prototype-kicad-project-ci-cd
+#       repository.
+
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    analyze-static-shellcheck:
+        name: Analyze (static) - shellcheck
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+            - name: Analyze
+              shell: bash
+              run: ./ci/analyze --analyzer shellcheck
+
+    scrub-kicad-project-files:
+        name: Scrub KiCad project files
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+            - name: Scrub KiCad project files
+              shell: bash
+              run: ./ci/scrub-kicad-project-files
+
+    check-klc-compliance-footprints:
+        name: Check KLC compliance - footprints
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Check KLC compliance
+              shell: bash
+              run: ./ci/check-klc-compliance --check-footprints
+
+    check-klc-compliance-symbols:
+        name: Check KLC compliance - symbols
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Check KLC compliance
+              shell: bash
+              run: ./ci/check-klc-compliance --check-symbols

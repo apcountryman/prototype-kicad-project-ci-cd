@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+# prototype-kicad-project-ci-cd
+#
+# Copyright 2021, Andrew Countryman <apcountryman@gmail.com> and the
+# prototype-kicad-project-ci-cd contributors
+#
+# You may redistribute and modify this documentation and make products using it under the
+# terms of the CERN-OHL-P v2 (https:/cern.ch/cern-ohl). This documentation is distributed
+# WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY
+# QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
+# applicable conditions.
+
+# File: ci/check-klc-compliance
+# Description: prototype-kicad-project-ci-cd repository CI KLC compliance check script.
+
+function error()
+{
+    local -r message="$1"
+
+    ( >&2 echo "$mnemonic: $message" )
+}
+
+function abort()
+{
+    if [[ "$#" -gt 0 ]]; then
+        local -r message="$1"
+
+        error "$message, aborting"
+    fi
+
+    exit 1
+}
+
+function display_help_text()
+{
+    echo "NAME"
+    echo "    $mnemonic - Check if project specific libraries comply with the KLC."
+    echo "SYNOPSIS"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic [--check-footprints] [--check-symbols]"
+    echo "OPTIONS"
+    echo "    --check-footprints"
+    echo "        Check project specific footprints for KLC compliance."
+    echo "    --help"
+    echo "        Display this help text."
+    echo "    --check-symbols"
+    echo "        Check project specific symbols for KLC compliance."
+    echo "    --version"
+    echo "        Display the version of this script."
+    echo "EXAMPLES"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic --check-footprints --check-symbols"
+}
+
+function display_version()
+{
+    echo "$mnemonic, version $version"
+}
+
+function check_symbols_for_klc_compliance()
+{
+    local symbols; mapfile -t symbols < <( git -C "$repository" ls-files '*.lib' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly symbols
+
+    if [[ "${#symbols[@]}" -ne 0 ]]; then
+        if ! "$repository/utilities/kicad-library-utils/schlib/checklib.py" -s -vv "${symbols[@]}"; then
+            abort
+        fi
+    fi
+}
+
+function check_footprints_for_klc_compliance()
+{
+    local footprints; mapfile -t footprints < <( git -C "$repository" ls-files '*.kicad_mod' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly footprints
+
+    if [[ "${#footprints[@]}" -ne 0 ]]; then
+        if ! "$repository/utilities/kicad-library-utils/pcb/check_kicad_mod.py" -s -vv "${footprints[@]}"; then
+            abort
+        fi
+    fi
+}
+
+function main()
+{
+    local -r script=$( readlink -f "$0" )
+    local -r mnemonic=$( basename "$script" )
+    local -r repository=$( readlink -f "$( dirname "$script" )/.." )
+    local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
+
+    while [[ "$#" -gt 0 ]]; do
+        local argument="$1"; shift
+
+        case "$argument" in
+            --check-footprints)
+                if [[ -z "$check_footprints" ]]; then
+                    local -r check_footprints="check-footprints"
+                fi
+                ;;
+            --help)
+                display_help_text
+                exit
+                ;;
+            --check-symbols)
+                if [[ -z "$check_symbols" ]]; then
+                    local -r check_symbols="check-symbols"
+                fi
+                ;;
+            --version)
+                display_version
+                exit
+                ;;
+            --*)
+                ;&
+            -*)
+                abort "'$argument' is not a supported option"
+                ;;
+            *)
+                abort "'$argument' is not a valid argument"
+                ;;
+        esac
+    done
+
+    if [[ -n "$check_footprints" ]]; then
+        check_footprints_for_klc_compliance
+    fi
+
+    if [[ -n "$check_symbols" ]]; then
+        check_symbols_for_klc_compliance
+    fi
+}
+
+main "$@"
