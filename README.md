@@ -62,8 +62,8 @@ If you are interested in contributing to `prototype-kicad-project-ci-cd`, please
 - Andrew Countryman
 
 ## License
-`prototype-kicad-project-ci-cd` is licensed under the CERN Open Hardware License Version 2
-- Permissive (CERN-OHL-P v2).
+`prototype-kicad-project-ci-cd` is licensed under the CERN Open Hardware License Version
+2 - Permissive (CERN-OHL-P v2).
 For more information, [see the `LICENSE` file in this repository](LICENSE).
 Additional information can be found in the Guide to the CERN-OHL-P v2 which is available
 in both [ODT](LICENSE-guide.odt) and [PDF](LICENSE-guide.pdf) formats.
