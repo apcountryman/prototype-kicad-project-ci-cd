@@ -98,14 +98,14 @@ function main()
                     local -r check_footprints="check-footprints"
                 fi
                 ;;
-            --help)
-                display_help_text
-                exit
-                ;;
             --check-symbols)
                 if [[ -z "$check_symbols" ]]; then
                     local -r check_symbols="check-symbols"
                 fi
+                ;;
+            --help)
+                display_help_text
+                exit
                 ;;
             --version)
                 display_version
