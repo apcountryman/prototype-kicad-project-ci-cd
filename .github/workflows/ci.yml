@@ -63,3 +63,14 @@ jobs:
             - name: Check KLC compliance
               shell: bash
               run: ./ci/check-klc-compliance --check-symbols
+
+    check-electrical-rules-compliance:
+        name: Check electrical rules compliance
+        runs-on: ubuntu-20.04
+        steps:
+            uses: actions/checkout@v2
+            with:
+                submodules: recursive
+            name: Check electrical rules compliance
+            shell: bash
+            run: ./ci/check-electrical-rules-compliance
