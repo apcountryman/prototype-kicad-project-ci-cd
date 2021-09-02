@@ -21,3 +21,6 @@
 [submodule "utilities/kicad-library-utils"]
 	path = utilities/kicad-library-utils
 	url = ../kicad-library-utils
+[submodule "utilities/KiAuto"]
+	path = utilities/KiAuto
+	url = ../KiAuto
