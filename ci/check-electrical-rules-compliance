@@ -36,11 +36,12 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Check if project schematic(s) comply with the project's
-    electrical rules."
+    echo "    $mnemonic - Check if project schematic(s) comply with the project's"
+    echo "        electrical rules."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
+    echo "    $mnemonic"
     echo "OPTIONS"
     echo "    --help"
     echo "        Display this help text."
@@ -49,6 +50,7 @@ function display_help_text()
     echo "EXAMPLES"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
+    echo "    $mnemonic"
 }
 
 function display_version()
