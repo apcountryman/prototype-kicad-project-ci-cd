@@ -108,6 +108,8 @@ function main()
                 ;;
         esac
     done
+    
+    readonly ignore_unconnected_nets
 
     check_design_rules_compliance
 }
