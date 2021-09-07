@@ -41,15 +41,14 @@ function display_help_text()
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
-    echo "    $mnemonic --ignore-unconnected-nets"
-    echo "    $mnemonic"
+    echo "    $mnemonic [--ignore-unconnected-nets]"
     echo "OPTIONS"
     echo "    --help"
     echo "        Display this help text."
-    echo "    --version"
-    echo "        Display the version of this script."
     echo "    --ignore-unconnected-nets"
     echo "        Ignore unconnected nets in the design rules check."
+    echo "    --version"
+    echo "        Display the version of this script."
     echo "EXAMPLES"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
@@ -87,12 +86,12 @@ function main()
         local argument="$1"; shift
 
         case "$argument" in
-            --ignore-unconnected-nets)
-                ignore_unconnected_nets="--ignore_unconnected"
-                exit
-                ;;
             --help)
                 display_help_text
+                exit
+                ;;
+            --ignore-unconnected-nets)
+                ignore_unconnected_nets="--ignore_unconnected"
                 exit
                 ;;
             --version)
