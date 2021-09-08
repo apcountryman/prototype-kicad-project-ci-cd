@@ -64,6 +64,17 @@ jobs:
               shell: bash
               run: ./ci/check-klc-compliance --check-symbols
 
+    check-design-rules-compliance:
+        name: Check design rules compliance
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Check design rules compliance
+              shell: bash
+              run: ./ci/check-design-rules-compliance --ignore-unconnected-nets
+
     check-electrical-rules-compliance:
         name: Check electrical rules compliance
         runs-on: ubuntu-20.04
