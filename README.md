@@ -60,6 +60,7 @@ If you are interested in contributing to `prototype-kicad-project-ci-cd`, please
 
 ## Authors
 - Andrew Countryman
+- Jay Lamb
 
 ## License
 `prototype-kicad-project-ci-cd` is licensed under the CERN Open Hardware License Version
