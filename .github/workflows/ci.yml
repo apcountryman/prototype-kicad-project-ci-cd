@@ -85,3 +85,20 @@ jobs:
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
+
+    generate-schematic-pdfs:
+        name: Generate schematic PDF(s)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Generate schematic PDF(s)
+              shell: bash
+              run: ./ci/generate-schematic-pdfs
+            - name: Archive generated schematic PDF(s)
+              uses: actions/upload-artifact@v2
+              with:
+                name: schematic-pdfs
+                path: schematic-pdfs
+                retention-days: 7
