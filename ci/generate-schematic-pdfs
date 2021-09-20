@@ -12,7 +12,8 @@
 # applicable conditions.
 
 # File: ci/generate-schematic-pdfs
-# Description: prototype-kicad-project-ci-cd repository CI schematic PDF generation script
+# Description: prototype-kicad-project-ci-cd repository CI schematic PDF(s) generation
+#       script.
 
 function error()
 {
@@ -35,7 +36,7 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Generate PDF(s) for all of the project's schematic sheets."
+    echo "    $mnemonic - Generate PDF(s) for the project's schematic(s)."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"

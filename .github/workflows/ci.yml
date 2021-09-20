@@ -99,6 +99,6 @@ jobs:
             - name: Archive generated schematic PDF(s)
               uses: actions/upload-artifact@v2
               with:
-                name: schematic-pdfs
-                path: schematic-pdfs
-                retention-days: 7
+                  name: schematic-pdfs
+                  path: schematic-pdfs
+                  retention-days: 7
