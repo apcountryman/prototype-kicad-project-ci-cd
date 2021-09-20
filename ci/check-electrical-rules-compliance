@@ -13,7 +13,7 @@
 
 # File: ci/check-electrical-rules-compliance
 # Description: prototype-kicad-project-ci-cd repository CI electrical rules compliance
-#     check script.
+#       check script.
 
 function error()
 {

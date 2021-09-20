@@ -13,7 +13,7 @@
 
 # File: ci/check-design-rules-compliance
 # Description: prototype-kicad-project-ci-cd repository CI design rules compliance check
-#     script.
+#       script.
 
 function error()
 {
