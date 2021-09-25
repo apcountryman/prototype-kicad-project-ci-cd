@@ -24,3 +24,6 @@
 [submodule "utilities/KiAuto"]
 	path = utilities/KiAuto
 	url = ../KiAuto
+[submodule "utilities/KiBoM"]
+	path = utilities/KiBoM
+	url = ../KiBoM

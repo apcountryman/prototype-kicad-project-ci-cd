@@ -102,3 +102,20 @@ jobs:
                   name: schematic-pdfs
                   path: schematic-pdfs
                   retention-days: 7
+
+    generate-traditional-boms:
+        name: Generate traditional BOM(s)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+                with:
+                    submodules: recursive
+            - name: Generate traditional BOM(s)
+              shell: bash
+              run: ./ci/generate-traditional-boms
+            - name: Archive generated traditional BOM(s)
+              uses: actions/upload-artifact@v2
+              with:
+                  name: traditional-boms
+                  path: traditional-boms
+                  retention-days: 7
