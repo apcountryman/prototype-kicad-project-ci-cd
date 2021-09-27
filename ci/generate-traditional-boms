@@ -70,7 +70,8 @@ function generate_traditional_boms()
     local boms_xml; mapfile -t boms_xml < <( find "$repository" -name '*.xml' ); readonly boms_xml
 
     for bom_xml in "${boms_xml[@]}"; do
-        local bom=$( basename "$bom_xml" .xml )
+        local bom
+        bom=$( basename "$bom_xml" .xml )
 
         if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" "$bom_xml" -d "$repository/traditional-boms" "$repository/traditional-boms/$bom.csv"; then
             abort
