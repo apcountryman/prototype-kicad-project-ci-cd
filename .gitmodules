@@ -27,3 +27,6 @@
 [submodule "utilities/KiBoM"]
 	path = utilities/KiBoM
 	url = ../KiBoM
+[submodule "utilities/InteractiveHtmlBom"]
+	path = utilities/InteractiveHtmlBom
+	url = ../InteractiveHtmlBom
