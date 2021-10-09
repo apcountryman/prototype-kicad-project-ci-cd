@@ -119,3 +119,20 @@ jobs:
                   name: traditional-boms
                   path: traditional-boms
                   retention-days: 7
+
+    generate-interactive-boms:
+        name: Generate interactive BOM(s)
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Generate interactive BOM(s)
+              shell: bash
+              run: ./ci/generate-interactive-boms
+            - name: Archive generated interactive BOM(s)
+              uses: actions/upload-artifact@v2
+              with:
+                  name: interactive-boms
+                  path: interactive-boms
+                  retention-days: 7
