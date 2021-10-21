@@ -136,3 +136,20 @@ jobs:
                   name: interactive-boms
                   path: interactive-boms
                   retention-days: 7
+
+    generate-production-files:
+        name: Generate production files
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Generate production files
+              shell: bash
+              run: ./ci/generate-production-files
+            - name: Archive generated production files
+              uses: actions/upload-artifact@v2
+              with:
+                  name: production-files
+                  path: production-files
+                  retention-days: 7
