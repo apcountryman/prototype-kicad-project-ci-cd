@@ -67,7 +67,7 @@ function generate_traditional_boms()
         fi
     done
 
-    local boms_xml; mapfile -t boms_xml < <( find "$repository" -name '*.xml' ); readonly boms_xml
+    local boms_xml; mapfile -t boms_xml < <( find "$repository/temp" -name '*.xml' ); readonly boms_xml
 
     for bom_xml in "${boms_xml[@]}"; do
         local bom; bom=$( basename "$bom_xml" .xml )
