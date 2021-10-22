@@ -1,0 +1,65 @@
+kibot:
+    version: 1
+
+preflight:
+    check_zone_fills: false
+    run_drc: false
+    run_erc: false
+    update_xml: false
+
+global:
+    output: '%f-%i.%x'
+
+outputs:
+    - name: 'Gerbers'
+      type: 'gerber'
+      dir: 'gerber'
+      options:
+          create_gerber_job_file: true
+          exclude_edge_layer: true
+          exclude_pads_from_silkscreen: true
+          force_plot_invisible_refs_vals: false
+          gerber_precision: 4.6
+          line_width: 0.1
+          plot_footprint_refs: true
+          plot_footprint_values: false
+          plot_sheet_reference: false
+          subtract_mask_from_silk: false
+          tent_vias: false
+          use_aux_axis_as_origin: false
+          use_gerber_net_attributes: true
+          use_gerber_x2_attributes: false
+          use_protel_extensions: false
+      layers:
+          - layer: 'F.Cu'
+          - layer: 'In1.Cu'
+          - layer: 'In2.Cu'
+          - layer: 'B.Cu'
+          - layer: 'F.Paste'
+          - layer: 'B.Paste'
+          - layer: 'F.SilkS'
+          - layer: 'B.SilkS'
+          - layer: 'F.Mask'
+          - layer: 'B.Mask'
+          - layer: 'Edge.Cuts'
+
+    - name: 'Drill'
+      type: 'excellon'
+      dir: 'gerber'
+      options:
+          map:
+              type: 'gerber'
+          metric_units: true
+          minimal_header: false
+          mirror_y_axis: false
+          pth_and_npth_single_file: true
+          use_aux_axis_as_origin: false
+
+    - name: 'Pick and Place'
+      type: 'position'
+      dir: 'pick-and-place'
+      options:
+          format: 'ASCII'
+          only_smd: true
+          separate_files_for_front_and_back: true
+          units: 'millimeters'

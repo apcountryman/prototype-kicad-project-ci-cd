@@ -30,3 +30,6 @@
 [submodule "utilities/InteractiveHtmlBom"]
 	path = utilities/InteractiveHtmlBom
 	url = ../InteractiveHtmlBom
+[submodule "utilities/KiBot"]
+	path = utilities/KiBot
+	url = ../KiBot
