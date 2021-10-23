@@ -36,7 +36,7 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Generate BOM(s) for the project."
+    echo "    $mnemonic - Generate interactive BOM(s) for the project."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
