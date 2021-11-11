@@ -153,3 +153,20 @@ jobs:
                   name: production-files
                   path: production-files
                   retention-days: 7
+
+    generate-pcb-renders:
+        name: Generate PCB renders
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+            - name: Generate PCB renders
+              shell: bash
+              run: ./ci/generate-pcb-renders
+            - name: Archive generated PCB renders
+              uses: actions/upload-artifact@v2
+              with:
+                  name: pcb-renders
+                  path: pcb-renders
+                  retention-days: 7
