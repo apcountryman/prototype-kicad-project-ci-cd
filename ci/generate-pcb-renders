@@ -81,7 +81,7 @@ function generate_pcb_renders()
                     abort
                 fi
 
-                if ! "$repository/utilities/PcbDraw/pcbdraw/pcbdraw.py" -b "$layout" "$repository/pcb-renders/$project_name-front.$format"; then
+                if ! "$repository/utilities/PcbDraw/pcbdraw/pcbdraw.py" -b "$layout" "$repository/pcb-renders/$project_name-back.$format"; then
                     abort
                 fi
             done
