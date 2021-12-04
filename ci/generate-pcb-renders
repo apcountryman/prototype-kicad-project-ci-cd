@@ -67,7 +67,7 @@ function generate_pcb_renders()
     if [[ "${#projects[@]}" -eq 1 ]]; then
         local -r project="${projects[0]}"
         local -r project_name=$( basename "$project" )
-        local -r layout="$project_name.kicad_pcb"
+        local -r layout="$repository/$project_name.kicad_pcb"
 
         if ! git -C "$repository" ls-files --error-unmatch "$layout"; then
             if ! mkdir "$repository/pcb-renders"; then

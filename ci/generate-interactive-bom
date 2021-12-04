@@ -68,7 +68,7 @@ function generate_interactive_bom()
     if [[ "${#projects[@]}" -eq 1 ]]; then
         local -r project="${projects[0]}"
         local -r project_name=$( basename "$project" )
-        local -r layout="$project_name.kicad_pcb"
+        local -r layout="$repository/$project_name.kicad_pcb"
 
         if ! git -C "$repository" ls-files --error-unmatch "$layout"; then
             if ! "$repository/utilities/InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py" --dest-dir "$repository/interactive-bom" "$layout"; then

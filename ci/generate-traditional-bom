@@ -68,7 +68,7 @@ function generate_traditional_bom()
     if [[ "${#projects[@]}" -eq 1 ]]; then
         local -r project="${projects[0]}"
         local -r project_name=$( basename "$project" )
-        local -r schematic="$project_name.sch"
+        local -r schematic="$repository/$project_name.sch"
 
         if ! git -C "$repository" ls-files --error-unmatch "$schematic"; then
             # KiAuto documentation refers to the following file as "the project's XML
