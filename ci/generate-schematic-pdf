@@ -11,8 +11,8 @@
 # QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
 # applicable conditions.
 
-# File: ci/generate-schematic-pdfs
-# Description: prototype-kicad-project-ci-cd repository CI schematic PDF(s) generation
+# File: ci/generate-schematic-pdf
+# Description: prototype-kicad-project-ci-cd repository CI schematic PDF generation
 #       script.
 
 function error()
@@ -36,7 +36,7 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Generate PDF(s) for the project's schematic(s)."
+    echo "    $mnemonic - Generate PDF of the project's schematic."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
@@ -57,15 +57,25 @@ function display_version()
     echo "$mnemonic, version $version"
 }
 
-function generate_schematic_pdfs()
+function generate_schematic_pdf()
 {
-    local schematics; mapfile -t schematics < <( git -C "$repository" ls-files '*.sch' ':!:*-sheet-*.sch' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly schematics
+    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.pro' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
 
-    for schematic in "${schematics[@]}"; do
-        if ! "$repository/utilities/KiAuto/src/eeschema_do" export -a "$schematic" "$repository/schematic-pdfs"; then
-            abort
+    if [[ "${#projects[@]}" -gt 1 ]]; then
+        abort "multiple projects found: ${projects[*]}"
+    fi
+
+    if [[ "${#projects[@]}" -eq 1 ]]; then
+        local -r project="${projects[0]}"
+        local -r project_name=$( basename "$project" )
+        local -r schematic="$repository/$project_name.sch"
+
+        if ! git -C "$repository" ls-files --error-unmatch "$schematic"; then
+            if ! "$repository/utilities/KiAuto/src/eeschema_do" export -a "$schematic" "$repository/schematic-pdf"; then
+                abort
+            fi
         fi
-    done
+    fi
 }
 
 function main()
@@ -98,7 +108,7 @@ function main()
         esac
     done
 
-    generate_schematic_pdfs
+    generate_schematic_pdf
 }
 
 main "$@"

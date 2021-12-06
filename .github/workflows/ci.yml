@@ -86,55 +86,55 @@ jobs:
               shell: bash
               run: ./ci/check-electrical-rules-compliance
 
-    generate-schematic-pdfs:
-        name: Generate schematic PDF(s)
+    generate-schematic-pdf:
+        name: Generate schematic PDF
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
-            - name: Generate schematic PDF(s)
+            - name: Generate schematic PDF
               shell: bash
-              run: ./ci/generate-schematic-pdfs
-            - name: Archive generated schematic PDF(s)
+              run: ./ci/generate-schematic-pdf
+            - name: Archive generated schematic PDF
               uses: actions/upload-artifact@v2
               with:
-                  name: schematic-pdfs
-                  path: schematic-pdfs
+                  name: schematic-pdf
+                  path: schematic-pdf
                   retention-days: 7
 
-    generate-traditional-boms:
-        name: Generate traditional BOM(s)
+    generate-traditional-bom:
+        name: Generate traditional BOM
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
-            - name: Generate traditional BOM(s)
+            - name: Generate traditional BOM
               shell: bash
-              run: ./ci/generate-traditional-boms
-            - name: Archive generated traditional BOM(s)
+              run: ./ci/generate-traditional-bom
+            - name: Archive generated traditional BOM
               uses: actions/upload-artifact@v2
               with:
-                  name: traditional-boms
-                  path: traditional-boms
+                  name: traditional-bom
+                  path: traditional-bom
                   retention-days: 7
 
-    generate-interactive-boms:
-        name: Generate interactive BOM(s)
+    generate-interactive-bom:
+        name: Generate interactive BOM
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
-            - name: Generate interactive BOM(s)
+            - name: Generate interactive BOM
               shell: bash
-              run: ./ci/generate-interactive-boms
-            - name: Archive generated interactive BOM(s)
+              run: ./ci/generate-interactive-bom
+            - name: Archive generated interactive BOM
               uses: actions/upload-artifact@v2
               with:
-                  name: interactive-boms
-                  path: interactive-boms
+                  name: interactive-bom
+                  path: interactive-bom
                   retention-days: 7
 
     generate-production-files:
