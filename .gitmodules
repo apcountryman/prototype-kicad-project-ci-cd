@@ -33,3 +33,6 @@
 [submodule "utilities/KiBot"]
 	path = utilities/KiBot
 	url = ../KiBot
+[submodule "utilities/PcbDraw"]
+	path = utilities/PcbDraw
+	url = ../PcbDraw

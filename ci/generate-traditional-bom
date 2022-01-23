@@ -11,8 +11,8 @@
 # QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
 # applicable conditions.
 
-# File: ci/generate-traditional-boms
-# Description: prototype-kicad-project-ci-cd repository CI traditional BOM(s) generation
+# File: ci/generate-traditional-bom
+# Description: prototype-kicad-project-ci-cd repository CI traditional BOM generation
 #       script.
 
 function error()
@@ -36,7 +36,7 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Generate traditional BOM(s) for the project."
+    echo "    $mnemonic - Generate traditional BOM for the project."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
@@ -57,37 +57,37 @@ function display_version()
     echo "$mnemonic, version $version"
 }
 
-function generate_traditional_boms()
+function generate_traditional_bom()
 {
-    local schematics; mapfile -t schematics < <( git -C "$repository" ls-files '*.sch' ':!:*-sheet-*.sch' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly schematics
+    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.pro' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
 
-    for schematic in "${schematics[@]}"; do
-        if ! "$repository/utilities/KiAuto/src/eeschema_do" bom_xml "$schematic" "$repository/temp"; then
-            abort
+    if [[ "${#projects[@]}" -gt 1 ]]; then
+        abort "multiple projects found: ${projects[*]}"
+    fi
+
+    if [[ "${#projects[@]}" -eq 1 ]]; then
+        local -r project="${projects[0]}"
+        local -r project_name=$( basename "$project" )
+        local -r schematic="$repository/$project_name.sch"
+
+        if ! git -C "$repository" ls-files --error-unmatch "$schematic"; then
+            # KiAuto documentation refers to the following file as "the project's XML
+            # BoM", but it will be used as KiBoM's "netlist" positional argument
+            local -r netlist="$repository/$project_name.xml"
+
+            if ! "$repository/utilities/KiAuto/src/eeschema_do" bom_xml "$schematic" "$repository/temp"; then
+                abort
+            fi
+
+            local -r formats=( "csv" "html" "xml" "xslx" )
+
+            for format in "${formats[@]}"; do
+                if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" -d "$repository/traditional-bom" "$netlist" "$project_name.$format"; then
+                    abort
+                fi
+            done
         fi
-    done
-
-    local boms_xml; mapfile -t boms_xml < <( find "$repository/temp" -name '*.xml' ); readonly boms_xml
-
-    for bom_xml in "${boms_xml[@]}"; do
-        local bom; bom=$( basename "$bom_xml" .xml )
-
-        if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" "$bom_xml" -d "$repository/traditional-boms" "$repository/traditional-boms/$bom.csv"; then
-            abort
-        fi
-
-        if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" "$bom_xml" -d "$repository/traditional-boms" "$repository/traditional-boms/$bom.html"; then
-            abort
-        fi
-
-        if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" "$bom_xml" -d "$repository/traditional-boms" "$repository/traditional-boms/$bom.xml"; then
-            abort
-        fi
-
-        if ! "$repository/utilities/KiBoM/KiBOM_CLI.py" "$bom_xml" -d "$repository/traditional-boms" "$repository/traditional-boms/$bom.xslx"; then
-            abort
-        fi
-    done
+    fi
 }
 
 function main()
@@ -120,7 +120,7 @@ function main()
         esac
     done
 
-    generate_traditional_boms
+    generate_traditional_bom
 }
 
 main "$@"

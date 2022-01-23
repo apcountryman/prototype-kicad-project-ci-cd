@@ -11,8 +11,8 @@
 # QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
 # applicable conditions.
 
-# File: ci/generate-production-files
-# Description: prototype-kicad-project-ci-cd repository CI production files generation
+# File: ci/generate-schematic-pdf
+# Description: prototype-kicad-project-ci-cd repository CI schematic PDF generation
 #       script.
 
 function error()
@@ -36,7 +36,7 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $mnemonic - Generate production files for the project."
+    echo "    $mnemonic - Generate PDF of the project's schematic."
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
@@ -57,9 +57,9 @@ function display_version()
     echo "$mnemonic, version $version"
 }
 
-function generate_production_files()
+function generate_schematic_pdf()
 {
-    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.kicad_pcb' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
+    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.pro' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
 
     if [[ "${#projects[@]}" -gt 1 ]]; then
         abort "multiple projects found: ${projects[*]}"
@@ -68,10 +68,10 @@ function generate_production_files()
     if [[ "${#projects[@]}" -eq 1 ]]; then
         local -r project="${projects[0]}"
         local -r project_name=$( basename "$project" )
-        local -r layout="$repository/$project_name.kicad_pcb"
+        local -r schematic="$repository/$project_name.sch"
 
-        if ! git -C "$repository" ls-files --error-unmatch "$layout"; then
-            if ! "$repository/utilities/KiBot/src/kibot" -b "$layout" -c "$repository/kibot.yml" -d "$repository/production-files"; then
+        if ! git -C "$repository" ls-files --error-unmatch "$schematic"; then
+            if ! "$repository/utilities/KiAuto/src/eeschema_do" export -a "$schematic" "$repository/schematic-pdf"; then
                 abort
             fi
         fi
@@ -108,7 +108,7 @@ function main()
         esac
     done
 
-    generate_production_files
+    generate_schematic_pdf
 }
 
 main "$@"
