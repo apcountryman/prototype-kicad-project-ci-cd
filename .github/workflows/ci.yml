@@ -138,7 +138,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt install python-wxtools
+              run: sudo apt install python3-wxgtk4.0
             - name: Generate interactive BOM
               shell: bash
               run: ./ci/generate-interactive-bom
@@ -176,6 +176,7 @@ jobs:
             - name: Install dependencies
               shell: bash
               run: sudo apt install python3-numpy
+              run: sudo pip install svgpathtools
             - name: Generate PCB renders
               shell: bash
               run: ./ci/generate-pcb-renders
