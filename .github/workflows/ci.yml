@@ -82,6 +82,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo apt install python3-psutil
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
@@ -93,6 +96,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo apt install python3-psutil
             - name: Generate schematic PDF(s)
               shell: bash
               run: ./ci/generate-schematic-pdfs
@@ -110,6 +116,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo apt install python3-psutil
             - name: Generate traditional BOM(s)
               shell: bash
               run: ./ci/generate-traditional-boms
@@ -127,6 +136,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo apt install python-wxtools
             - name: Generate interactive BOM(s)
               shell: bash
               run: ./ci/generate-interactive-boms
