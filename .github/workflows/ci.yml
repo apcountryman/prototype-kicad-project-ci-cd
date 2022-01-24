@@ -138,7 +138,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt install python3-wxgtk4.0
+              run: sudo pip install wxpython
             - name: Generate interactive BOM
               shell: bash
               run: ./ci/generate-interactive-bom
