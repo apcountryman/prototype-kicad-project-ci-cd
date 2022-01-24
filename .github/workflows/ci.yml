@@ -175,8 +175,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt install python3-numpy
-              run: sudo pip install svgpathtools
+              run: sudo apt install python3-numpy; sudo pip install svgpathtools
             - name: Generate PCB renders
               shell: bash
               run: ./ci/generate-pcb-renders
