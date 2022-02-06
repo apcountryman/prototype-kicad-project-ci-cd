@@ -14,3 +14,12 @@
 
 # ignore the KiCad footprint cache
 fp-info-cache
+
+# ignore schematic backup
+*.sch-bak
+
+# ignore symbol library cache
+*-cache.lib
+
+# ignore swap files
+*.swp
