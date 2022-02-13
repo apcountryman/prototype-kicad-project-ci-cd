@@ -84,7 +84,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt update; sudo apt install python3-psutil python3-xvfbwrapper
+              run: sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
@@ -98,7 +98,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt update; sudo apt install python3-psutil python3-xvfbwrapper
+              run: sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper
             - name: Generate schematic PDF
               shell: bash
               run: ./ci/generate-schematic-pdf
@@ -118,7 +118,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt update; sudo apt install python3-psutil python3-xvfbwrapper
+              run: sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper
             - name: Generate traditional BOM
               shell: bash
               run: ./ci/generate-traditional-bom
@@ -138,7 +138,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt update --fix-missing; sudo apt install python3-wxgtk4.0
+              run: sudo apt update --fix-missing; sudo apt install kicad python3-wxgtk4.0
             - name: Generate interactive BOM
               shell: bash
               run: ./ci/generate-interactive-bom
@@ -156,6 +156,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo apt update; sudo apt install kicad
             - name: Generate production files
               shell: bash
               run: ./ci/generate-production-files
@@ -175,7 +178,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt update; sudo apt install python3-numpy python3-wand; sudo pip install svgpathtools
+              run: sudo apt update; sudo apt install kicad python3-numpy python3-wand; sudo pip install svgpathtools
             - name: Generate PCB renders
               shell: bash
               run: ./ci/generate-pcb-renders
