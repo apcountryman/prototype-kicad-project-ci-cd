@@ -18,6 +18,9 @@ fp-info-cache
 # ignore schematic backup
 *.sch-bak
 
+# ignore pcb layout backup
+*.kicad_pcb-bak
+
 # ignore symbol library cache
 *-cache.lib
 

@@ -1,6 +1,6 @@
-update=Sun 13 Feb 2022 01:29:04 PM PST
+update=
 version=1
-last_client=kicad
+last_client=
 [general]
 version=1
 RootSch=
