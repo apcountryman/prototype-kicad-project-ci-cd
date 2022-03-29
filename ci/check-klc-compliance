@@ -62,10 +62,10 @@ function display_version()
 
 function check_symbols_for_klc_compliance()
 {
-    local symbols; mapfile -t symbols < <( git -C "$repository" ls-files '*.lib' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly symbols
+    local symbols; mapfile -t symbols < <( git -C "$repository" ls-files '*.kicad_sym' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly symbols
 
     if [[ "${#symbols[@]}" -ne 0 ]]; then
-        if ! "$repository/utilities/kicad-library-utils/schlib/checklib.py" -s -vv "${symbols[@]}"; then
+        if ! "$repository/utilities/kicad-library-utils/klc-check/check_symbol.py" -s -vv "${symbols[@]}"; then
             abort
         fi
     fi
@@ -76,7 +76,7 @@ function check_footprints_for_klc_compliance()
     local footprints; mapfile -t footprints < <( git -C "$repository" ls-files '*.kicad_mod' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly footprints
 
     if [[ "${#footprints[@]}" -ne 0 ]]; then
-        if ! "$repository/utilities/kicad-library-utils/pcb/check_kicad_mod.py" -s -vv "${footprints[@]}"; then
+        if ! "$repository/utilities/kicad-library-utils/klc-check/check_footprint.py" -s -vv "${footprints[@]}"; then
             abort
         fi
     fi
