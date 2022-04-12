@@ -33,15 +33,6 @@ jobs:
               shell: bash
               run: ./ci/analyze --analyzer shellcheck
 
-    scrub-kicad-project-files:
-        name: Scrub KiCad project files
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
-            - name: Scrub KiCad project files
-              shell: bash
-              run: ./ci/scrub-kicad-project-files
-
     check-klc-compliance-footprints:
         name: Check KLC compliance - footprints
         runs-on: ubuntu-20.04
