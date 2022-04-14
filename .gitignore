@@ -26,3 +26,9 @@ fp-info-cache
 
 # ignore swap files
 *.swp
+
+# ignore project backups
+*-backups/
+
+# ignore project last used settings
+*.kicad_prl
