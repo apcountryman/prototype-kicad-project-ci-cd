@@ -75,7 +75,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper imagemagick
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
