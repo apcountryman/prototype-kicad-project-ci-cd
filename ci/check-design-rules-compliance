@@ -67,7 +67,7 @@ function check_design_rules_compliance()
 
     for layout in "${layouts[@]}"; do
         if ! "$repository/utilities/KiAuto/src/pcbnew_do" run_drc "$ignore_unconnected_nets" "$layout" "$repository"; then
-            cat "$repository/"*.drt
+            cat "$repository/"*.rpt
             abort
         fi
     done
