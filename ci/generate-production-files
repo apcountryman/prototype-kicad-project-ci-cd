@@ -59,7 +59,7 @@ function display_version()
 
 function generate_production_files()
 {
-    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.pro' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
+    local projects; mapfile -t projects < <( git -C "$repository" ls-files '*.kicad_pro' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly projects
 
     if [[ "${#projects[@]}" -gt 1 ]]; then
         abort "multiple projects found: ${projects[*]}"
@@ -67,10 +67,10 @@ function generate_production_files()
 
     if [[ "${#projects[@]}" -eq 1 ]]; then
         local -r project="${projects[0]}"
-        local -r project_name=$( basename -s .pro "$project" )
+        local -r project_name=$( basename -s .kicad_pro "$project" )
         local -r layout="$repository/$project_name.kicad_pcb"
 
-        if ! git -C "$repository" ls-files --error-unmatch "$layout"; then
+        if git -C "$repository" ls-files --error-unmatch "$layout"; then
             if ! "$repository/utilities/KiBot/src/kibot" -b "$layout" -c "$repository/kibot.yml" -d "$repository/production-files"; then
                 abort
             fi
