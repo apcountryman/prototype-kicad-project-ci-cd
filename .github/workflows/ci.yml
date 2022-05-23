@@ -62,6 +62,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper imagemagick xdotool
             - name: Check design rules compliance
               shell: bash
               run: ./ci/check-design-rules-compliance
