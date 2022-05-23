@@ -66,9 +66,16 @@ function check_design_rules_compliance()
     local layouts; mapfile -t layouts < <( git -C "$repository" ls-files '*.kicad_pcb' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly layouts
 
     for layout in "${layouts[@]}"; do
-        if ! "$repository/utilities/KiAuto/src/pcbnew_do" run_drc "$ignore_unconnected_nets" "$layout" "$repository"; then
-            cat "$repository/"*.rpt
-            abort
+        if [[ -n "$ignore_unconnected_nets" ]]; then
+            if ! "$repository/utilities/KiAuto/src/pcbnew_do" run_drc --ignore_unconnected "$layout" "$repository"; then
+                cat "$repository/"*.rpt
+                abort
+            fi
+        else
+            if ! "$repository/utilities/KiAuto/src/pcbnew_do" run_drc "$layout" "$repository"; then
+                cat "$repository/"*.rpt
+                abort
+            fi
         fi
     done
 }
@@ -80,8 +87,6 @@ function main()
     local -r repository=$( readlink -f "$( dirname "$script" )/.." )
     local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
 
-    local ignore_unconnected_nets=""
-
     while [[ "$#" -gt 0 ]]; do
         local argument="$1"; shift
 
@@ -91,8 +96,9 @@ function main()
                 exit
                 ;;
             --ignore-unconnected-nets)
-                ignore_unconnected_nets="--ignore_unconnected"
-                exit
+                if [[ -z "$ignore_unconnected_nets" ]]; then
+                    local -r ignore_unconnected_nets="true"
+                fi
                 ;;
             --version)
                 display_version
@@ -109,8 +115,6 @@ function main()
         esac
     done
     
-    readonly ignore_unconnected_nets
-
     check_design_rules_compliance
 }
 
