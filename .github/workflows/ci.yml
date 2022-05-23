@@ -64,7 +64,7 @@ jobs:
                   submodules: recursive
             - name: Check design rules compliance
               shell: bash
-              run: ./ci/check-design-rules-compliance --ignore-unconnected-nets
+              run: ./ci/check-design-rules-compliance
 
     check-electrical-rules-compliance:
         name: Check electrical rules compliance
