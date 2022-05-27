@@ -49,7 +49,10 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "clearance|147336287|105902798|c01d25cd-f4bb-4ef3-b5ea-533a2a4ddb2b|bdc7face-9f7c-4701-80bb-4cc144448db1",
+        "clearance|147886287|105402798|9b0a1687-7e1b-4a04-a30b-c27a072a2949|bdc7face-9f7c-4701-80bb-4cc144448db1"
+      ],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
