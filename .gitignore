@@ -24,9 +24,6 @@ fp-info-cache
 # ignore symbol library cache
 *-cache.lib
 
-# ignore swap files
-*.swp
-
 # ignore project backups
 *-backups/
 
