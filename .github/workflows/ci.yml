@@ -64,7 +64,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper imagemagick xdotool
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install imagemagick kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Check design rules compliance
               shell: bash
               run: ./ci/check-design-rules-compliance
@@ -78,7 +78,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper imagemagick xdotool
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install imagemagick kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
@@ -92,7 +92,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Generate schematic PDF
               shell: bash
               run: ./ci/generate-schematic-pdf
@@ -112,7 +112,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Generate traditional BOM
               shell: bash
               run: ./ci/generate-traditional-bom
@@ -132,7 +132,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update --fix-missing; sudo apt install kicad python3-wxgtk4.0 python3-xvfbwrapper
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-wxgtk4.0 python3-xvfbwrapper
             - name: Generate interactive BOM
               shell: bash
               run: xvfb-run --auto-servernum ci/generate-interactive-bom
@@ -152,7 +152,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad; sudo pip install qrcodegen
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad && sudo pip install qrcodegen
             - name: Generate production files
               shell: bash
               run: ./ci/generate-production-files
@@ -172,7 +172,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases; sudo apt update; sudo apt install kicad python3-numpy python3-wand; sudo pip install svgpathtools pcbnewTransition lxml
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-numpy python3-wand && sudo pip install lxml pcbnewTransition svgpathtools
             - name: Generate PCB renders
               shell: bash
               run: ./ci/generate-pcb-renders
