@@ -62,9 +62,12 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install imagemagick kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Check design rules compliance
               shell: bash
-              run: ./ci/check-design-rules-compliance --ignore-unconnected-nets
+              run: ./ci/check-design-rules-compliance
 
     check-electrical-rules-compliance:
         name: Check electrical rules compliance
@@ -73,6 +76,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install imagemagick kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Check electrical rules compliance
               shell: bash
               run: ./ci/check-electrical-rules-compliance
@@ -84,6 +90,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Generate schematic PDF
               shell: bash
               run: ./ci/generate-schematic-pdf
@@ -101,6 +110,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-psutil python3-xvfbwrapper xdotool
             - name: Generate traditional BOM
               shell: bash
               run: ./ci/generate-traditional-bom
@@ -118,9 +130,12 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-wxgtk4.0 python3-xvfbwrapper
             - name: Generate interactive BOM
               shell: bash
-              run: ./ci/generate-interactive-bom
+              run: xvfb-run --auto-servernum ci/generate-interactive-bom
             - name: Archive generated interactive BOM
               uses: actions/upload-artifact@v2
               with:
@@ -135,6 +150,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad && sudo pip install qrcodegen
             - name: Generate production files
               shell: bash
               run: ./ci/generate-production-files
@@ -152,6 +170,9 @@ jobs:
             - uses: actions/checkout@v2
               with:
                   submodules: recursive
+            - name: Install dependencies
+              shell: bash
+              run: sudo add-apt-repository --yes ppa:kicad/kicad-6.0-releases && sudo apt update && sudo apt install kicad python3-numpy python3-wand && sudo pip install lxml pcbnewTransition svgpathtools
             - name: Generate PCB renders
               shell: bash
               run: ./ci/generate-pcb-renders

@@ -14,3 +14,18 @@
 
 # ignore the KiCad footprint cache
 fp-info-cache
+
+# ignore schematic backup
+*.sch-bak
+
+# ignore pcb layout backup
+*.kicad_pcb-bak
+
+# ignore symbol library cache
+*-cache.lib
+
+# ignore project backups
+*-backups/
+
+# ignore project last used settings
+*.kicad_prl

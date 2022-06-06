@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MAX6683
+D Temperature sensor and system monitor
+K Maxim, MAX6683, max6683, temperature, monitor
+F https://datasheets.maximintegrated.com/en/ds/MAX6683.pdf
+$ENDCMP
+#
+#End Doc Library
