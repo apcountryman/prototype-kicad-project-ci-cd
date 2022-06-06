@@ -4,6 +4,10 @@
 
 KiCad project GitHub Actions CI/CD prototype.
 
+*NOTE: The test printed circuit board contained within this repository was developed
+specifically to test the CI/CD pipeline, and does not have the finishing touches expected
+of a finished product*
+
 ## Obtaining the Source Code
 HTTPS:
 ```shell
