@@ -1,0 +1,37 @@
+# prototype-kicad-project-ci-cd
+#
+# Copyright 2021, Andrew Countryman <apcountryman@gmail.com> and the
+# prototype-kicad-project-ci-cd contributors
+#
+# You may redistribute and modify this documentation and make products using it under the
+# terms of the CERN-OHL-P v2 (https:/cern.ch/cern-ohl). This documentation is distributed
+# WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF MERCHANTABILITY, SATISFACTORY
+# QUALITY AND FITNESS FOR A PARTICULAR PURPOSE. Please see the CERN-OHL-P v2 for
+# applicable conditions.
+
+# File: .github/workflows/release.yml
+# Description: GitHub Actions release workflow for the prototype-kicad-project-ci-cd
+#       repository.
+
+name: Release
+
+on:
+    push:
+        tags:
+            - production-**
+            - prototype-**
+            - test-**
+
+jobs:
+    release:
+        name: Release
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+            - name: Create File
+              shell: bash
+              run: echo "Some file" > file.txt
+            - name: Upload file
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: file.txt
